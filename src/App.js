@@ -34,11 +34,9 @@ function fetchDataFromApi() {
       "https://api.themoviedb.org/3/movie/now_playing?api_key=9a818d2dabb5a1bab0d8d69cd979f026"
     )
     .then(function(response) {
-      // handle success
-      console.log(response);
+      return response.data;
     })
     .catch(function(error) {
-      // handle error
-      console.log(error);
+      return error;
     });
 }
