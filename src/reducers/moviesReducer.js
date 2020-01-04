@@ -1,0 +1,1 @@
+export default () => "list of movies from database"
