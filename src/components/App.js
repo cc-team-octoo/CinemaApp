@@ -1,8 +1,8 @@
 import React from 'react';
-
+import SeanceRoom from './SeanceRoom'
 
 const App = () => {
-  return <div>Hello</div>
+  return <SeanceRoom/>
 };
 
 
