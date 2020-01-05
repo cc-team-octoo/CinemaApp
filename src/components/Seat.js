@@ -7,6 +7,17 @@ const Seat = styled.div`
     background-color: green;
     margin: 2px;
     display: inline-block;
+    cursor: pointer;
+    color: green;
+    font-size: 10px;
+    line-height: 20px;
+    text-align: center;
+    user-select: none;
+
+    &:hover {
+        color: #fafafa;
+        background-color: purple;
+    }
 `;
 
 export default Seat;
