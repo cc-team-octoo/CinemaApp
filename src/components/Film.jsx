@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react';
 
-const Film = (props) => {
-    const details = props.film
+class Film extends React.Component {
+    
+    componentDidMount() {
 
-    return (
-        <li>
-            <span><img src={details.poster_path} alt=""/></span>
-            <span>{details.title}</span>
-        </li>
-    )
+    }
+
+    render() {
+        return <h1>Film</h1>;
+    }
 }
 
-export default Film;
+export default Film;
