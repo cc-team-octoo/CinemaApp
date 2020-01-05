@@ -1,8 +1,12 @@
 import React from 'react';
-import Seat from './Seat'
+import Row from './Row'
 
 const SeanceRoom = () => {
-    return <Seat/>
+    // let row = [];
+    // for (let i = 0; i < 10; i++) {
+    //     row.push(<Seat/>)
+    // }
+return <Row/>
 };
 
 export default SeanceRoom;
