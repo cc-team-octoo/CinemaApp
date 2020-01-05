@@ -1,7 +1,8 @@
 import React from 'react';
+import Seat from './Seat'
 
 const SeanceRoom = () => {
-    return "Seance room picture here"
+    return <Seat/>
 };
 
 export default SeanceRoom;
