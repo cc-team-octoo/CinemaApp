@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import { connect } from 'react-redux';
 import { fetchCurrentFilms } from '../actions';
+import Film from './Film';
 
 function mapStateToProps(state) {
     return {
@@ -35,10 +36,14 @@ class FilmsNowInTheatresConnected extends Component {
         this.fetchFilms()
     }
 
-    render() {
-        return <h1></h1>
-    }
-
+    render() {
+        const currentFilms = this.props.currentFilms;
+        return (
+            <ol>
+                {currentFilms.map(film => (<Film film={film} />))}
+            </ol>
+        )
+    }
 }
 
 const FilmsNowInTheatres = connect(mapStateToProps, mapDispatchToProps)(FilmsNowInTheatresConnected);
