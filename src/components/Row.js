@@ -4,7 +4,7 @@ import Seat from './Seat';
 const Row = () => {
     let row = [];
     for (let i = 0; i < 10; i++) {
-    row.push(<Seat id={i} key={i}>{i}</Seat>);
+        row.push(<Seat id={i+1} key={i+1}></Seat>);
     }
 return <div>{row}</div>
 };
