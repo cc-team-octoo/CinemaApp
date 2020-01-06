@@ -1,23 +1,22 @@
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import { StyledSeat, CheckboxContainer, HiddenCheckbox } from './StyledSeat';
 
-const Seat = styled.div`
-    height: 20px;
-    width: 20px;
-    border-radius: 5px;
-    background-color: green;
-    margin: 2px;
-    display: inline-block;
-    cursor: pointer;
-    color: green;
-    font-size: 10px;
-    line-height: 20px;
-    text-align: center;
-    user-select: none;
+class Seat extends Component {
+    state = { checked: false }
 
-    &:hover {
-        color: #fafafa;
-        background-color: purple;
+    handleCheckboxChange = event =>
+        this.setState({ checked: event.target.checked })
+    
+    render(props) {
+        return (
+            <CheckboxContainer
+                checked={this.state.checked}
+                onChange={this.handleCheckboxChange}>
+                    <HiddenCheckbox checked={this.state.checked} />
+                    <StyledSeat checked={this.state.checked}>{this.props.id}</StyledSeat>
+            </CheckboxContainer>
+        ) 
     }
-`;
+}
 
 export default Seat;
