@@ -21,7 +21,7 @@ class FilmsNowInTheatres extends Component {
                 <h1>Movie List</h1>
                 <ol>
                     { currentFilms.map(film => (
-                        <Film key={film.title} film={film} />
+                        <Film key={film.id} film={film} />
                     )) }
                 </ol>
             </React.Fragment>
