@@ -2,11 +2,12 @@ import React from 'react';
 import Row from './Row'
 
 const SeanceRoom = () => {
-    // let row = [];
-    // for (let i = 0; i < 10; i++) {
-    //     row.push(<Seat/>)
-    // }
-return <Row/>
+    let room = [];
+    for (let i = 0; i < 8; i++) {
+        room.push(<Row/>)
+    }
+
+    return <div>{room}</div>
 };
 
 export default SeanceRoom;
