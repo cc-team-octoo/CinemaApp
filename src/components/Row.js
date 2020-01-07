@@ -1,16 +1,18 @@
 import React from 'react';
 import Seat from './Seat';
+import { StyledRow } from './Styled'
 
-const Row = () => {
+const Row = (props) => {
     let row = [];
     for (let i = 0; i < 10; i++) {
         row.push(
             <Seat 
                 id={i+1} 
-                key={i+1}>
+                key={i+1}
+                rowName={props.rowName}>
             </Seat>);
     }
-return <div>{row}</div>
+return <StyledRow rowName={props.rowName}>{row}</StyledRow>
 };
 
 export default Row;

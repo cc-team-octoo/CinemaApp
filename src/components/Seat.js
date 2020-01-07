@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyledSeat, CheckboxContainer, HiddenCheckbox } from './StyledSeat';
+import { StyledSeat, CheckboxContainer, HiddenCheckbox } from './Styled';
 
 class Seat extends Component {
     constructor(props) {
@@ -11,8 +11,8 @@ class Seat extends Component {
     handleCheckboxChange = async event => {
         await this.setState({ checked: event.target.checked });
         this.state.checked ? 
-            console.log(`Seat number ${this.props.id} is checked`) : 
-            console.log(`Seat number ${this.props.id} was unchecked`)
+            console.log(`Seat number ${this.props.id}${this.props.rowName} is checked`) : 
+            console.log(`Seat number ${this.props.id}${this.props.rowName} was unchecked`)
     }        
     
     render() {
