@@ -4,5 +4,3 @@ import currentFilmsReducer from './currentFilms';
 export default combineReducers({
     currentFilms: currentFilmsReducer
 });
-
-
