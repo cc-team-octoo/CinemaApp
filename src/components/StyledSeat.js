@@ -5,7 +5,7 @@ export const StyledSeat = styled.div`
     width: 30px;
     border-radius: 5px;
     background-color: ${props => props.checked ? 'black' : 'green'};
-    margin: 2px;
+    margin: 3px 2px;
     display: inline-block;
     cursor: pointer;
     color: ${props => props.checked ? '#fafafa' : 'green'};
@@ -14,6 +14,7 @@ export const StyledSeat = styled.div`
     line-height: 30px;
     text-align: center;
     user-select: none;
+    transition: background-color .1s;
 
     &:hover {
         color: #fafafa;
