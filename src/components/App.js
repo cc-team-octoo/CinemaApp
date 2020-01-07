@@ -1,8 +1,17 @@
 import React from 'react';
-import SeanceRoom from './SeanceRoom'
+import { HashRouter, Route} from 'react-router-dom';
+import SeanceRoom from './SeanceRoom';
 
 const App = () => {
-  return <SeanceRoom/>
+    return (
+        <div>
+            <HashRouter>
+                <div>
+                    <Route path="/seats" exact component={SeanceRoom} />
+                </div>
+            </HashRouter>
+        </div>
+    );
 };
 
 
