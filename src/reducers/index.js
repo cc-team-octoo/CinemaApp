@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import moviesReducer from './moviesReducer';
 import { reducer as formReducer } from 'redux-form';
+import currentFilmsReducer from './currentFilms';
 
 export default combineReducers({
-    movies: moviesReducer,
-    form: formReducer
-})
+    form: formReducer,
+    currentFilms: currentFilmsReducer
+});
