@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledSeat = styled.div`
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     border-radius: 5px;
     background-color: ${props => props.checked ? 'black' : 'green'};
     margin: 3px 2px;
@@ -10,7 +10,7 @@ export const StyledSeat = styled.div`
     cursor: pointer;
     color: ${props => props.checked ? '#fafafa' : 'green'};
     font-size: 12px;
-    line-height: 30px;
+    line-height: 20px;
     text-align: center;
     user-select: none;
     transition: background-color .1s;
@@ -18,6 +18,12 @@ export const StyledSeat = styled.div`
     &:hover {
         color: #fafafa;
         background-color: purple;
+    }
+
+    @media (min-width: 400px) {
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
     }
 `;
 
@@ -60,7 +66,8 @@ export const StyledFormContainer = styled.div`
   align-items: center;
   max-width: 500px;
   margin: auto;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
+  text-align: center;
   border: 2px solid #2F4858;
   border-radius: 5px;
 `;
@@ -72,12 +79,17 @@ export const StyledForm = styled.form`
   margin-top: 10px;
 `;
 
+export const StyledResInfo = styled.p`
+  margin: 1rem 0;
+`;
+
 export const StyledInput = styled.input`
   border: 1px solid grey;
   border-radius: 5px;
   font-size: 1rem;
   padding: 8px;
   margin: 5px;
+  min-width: 240px;
 
   &:focus {
     outline: none;
@@ -111,6 +123,7 @@ export const StyledButton = styled.button`
   &:disabled, &:disabled&:hover {
     background-color: rgba(47, 72, 88, .6);
     box-shadow: none;
+    cursor: default;
   }
 
   &:focus, &:active, &:hover {
