@@ -1,14 +1,14 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { StyledForm, StyledFormContainer, StyledInput } from './Styled'
+import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton } from './Styled'
 
 const validate = formValues => {
     const { username, email } = formValues;
     const errors = {};
     if (!username) {
         errors.username = 'Your name is required'
-    } else if (username.length > 15 || username.length < 3) {
-        errors.username = 'The name must have at least 3 characters and maximum 15'
+    } else if (username.length > 15) {
+        errors.username = 'The name can have max 15 characters'
     }
     if (!email) {
         errors.email = 'Your email is required'
@@ -20,15 +20,14 @@ const validate = formValues => {
 
 const renderField = ({
     input,
-    label,
     type,
+    label,
     meta: { touched, error }
     }) => (
     <div>
-        <label>{label}</label>
         <div>
-        <StyledInput {...input} placeholder={label} type={type} autoComplete="off"/>
-        {touched && error && <span>{error}</span>}
+        <StyledInput {...input} placeholder={label} type={type} autoComplete="off" />
+        {touched && error && <StyledError>{error}</StyledError>}
         </div>
     </div>
 )
@@ -39,22 +38,23 @@ const ReservationForm = props => {
     return (
         <StyledFormContainer>
             <h2>Reservation form</h2>
+            <p>Put here your name and email address so we can send you a confirmation message of your reservation</p>
             <StyledForm onSubmit={handleSubmit(onSubmit)}>
                 <Field
                 name="username"
                 type="text"
                 component={renderField}
-                label="Username"
+                label="username"
                 />
                 <Field 
                     name="email" 
                     type="email" 
                     component={renderField} 
-                    label="Email" />
+                    label="email" />
                 <div>
-                <button type="submit" disabled={pristine || submitting}>
+                <StyledButton type="submit" disabled={pristine || submitting}>
                     Submit
-                </button>
+                </StyledButton>
                 </div>
             </StyledForm>
       </StyledFormContainer>

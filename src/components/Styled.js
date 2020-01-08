@@ -54,10 +54,6 @@ export const StyledRoom = styled.div`
   margin: 15px;
 `;
 
-export const StyledForm = styled.form`
-  // border: 2px solid red;
-`;
-
 export const StyledFormContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -65,13 +61,61 @@ export const StyledFormContainer = styled.div`
   max-width: 500px;
   margin: auto;
   padding: 1rem;
-  border: 2px solid blue;
+  border: 2px solid #2F4858;
+  border-radius: 5px;
+`;
+
+export const StyledForm = styled.form`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-top: 10px;
 `;
 
 export const StyledInput = styled.input`
-  border: none;
-  border-bottom: 1px solid grey;
+  border: 1px solid grey;
   border-radius: 5px;
   font-size: 1rem;
-  padding: 5px;
+  padding: 8px;
+  margin: 5px;
+
+  &:focus {
+    outline: none;
+    box-shadow: 2px 4px 8px #87898a;
+  };
+
+  &::placeholder {
+    color: #87898a;
+  }
+`;
+
+export const StyledError = styled.p`
+  font-size: .8rem;
+  color: #D8000C;
+  background-color: #FFBABA;
+  text-align: center;
+  padding: 2px;
+  margin: 2px;
+`;
+
+export const StyledButton = styled.button`
+  font-size: 1.2rem;
+  color: #fafafa;
+  padding: .5rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #2F4858;
+  margin: 10px;
+  cursor: pointer;
+
+  &:disabled, &:disabled&:hover {
+    background-color: rgba(47, 72, 88, .6);
+    box-shadow: none;
+  }
+
+  &:focus, &:active, &:hover {
+    outline: none;
+    background-color: #005263;
+    box-shadow: 2px 4px 8px #87898a;
+  }
 `;
