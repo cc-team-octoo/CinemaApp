@@ -50,7 +50,28 @@ export const StyledRow = styled.div`
 `;
 
 export const StyledRoom = styled.div`
-  font-family: Roboto, sans-serif;
   text-align: center;
   margin: 15px;
+`;
+
+export const StyledForm = styled.form`
+  // border: 2px solid red;
+`;
+
+export const StyledFormContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  max-width: 500px;
+  margin: auto;
+  padding: 1rem;
+  border: 2px solid blue;
+`;
+
+export const StyledInput = styled.input`
+  border: none;
+  border-bottom: 1px solid grey;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 5px;
 `;

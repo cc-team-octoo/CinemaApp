@@ -1,6 +1,7 @@
 import React from 'react';
 import Row from './Row';
 import { StyledRoom } from './Styled';
+import ReservationFrom from './ReservationForm'
 
 const SeanceRoom = () => {
     let room = [];
@@ -11,7 +12,12 @@ const SeanceRoom = () => {
             rowName={rows[i]}/>)
     };
 
-    return <StyledRoom>{room}</StyledRoom>
+    return (
+        <div>
+            <StyledRoom>{room}</StyledRoom>
+            <ReservationFrom />
+        </div>
+    )     
 };
 
 export default SeanceRoom;
