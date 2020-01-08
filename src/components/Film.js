@@ -14,8 +14,8 @@ class Film extends React.Component {
                 <span>{film.overview}</span>
                 <span>Book a ticket:
                     {
-                        this.screeningTimeList.map(screening => (
-                            <ScreeningTimeButton time={screening}/>
+                        this.screeningTimeList.map((screening, i) => (
+                            <ScreeningTimeButton key={i} time={screening} filmId={film.id}/>
                         ))
                     }
                 </span>
