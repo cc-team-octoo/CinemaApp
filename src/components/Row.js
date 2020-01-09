@@ -8,7 +8,7 @@ const Row = (props) => {
         row.push(
             <Seat 
                 id={i+1} 
-                key={i+1}
+                key={`seat${i+1}`}
                 rowName={props.rowName}>
             </Seat>);
     }
