@@ -1,8 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ScreeningTimeButton from './ScreeningTimeButton';
+import { setFilmToBook, setTimeOfBooking } from '../actions'
+
+const mapDispatchToProps = {
+    setFilmToBook,
+    setTimeOfBooking
+}
 
 class Film extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
     screeningTimeList = ['4:00 PM', '6:30 PM', '9:00 PM'];
+
+    handleClick(e) {
+        this.props.setFilmToBook(this.props.film.id);
+        this.props.setTimeOfBooking(e.target.innerText);
+    }
 
     render() {
         const {film} = this.props;
@@ -15,7 +32,7 @@ class Film extends React.Component {
                 <span>Book a ticket:
                     {
                         this.screeningTimeList.map((screening, i) => (
-                            <ScreeningTimeButton key={i} time={screening} filmId={film.id}/>
+                            <ScreeningTimeButton key={i} time={screening} filmId={film.id} handleClick={this.handleClick}/>
                         ))
                     }
                 </span>
@@ -24,4 +41,4 @@ class Film extends React.Component {
     }
 }
 
-export default Film;
+export default connect(null, mapDispatchToProps)(Film);

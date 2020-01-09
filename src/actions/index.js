@@ -5,4 +5,18 @@ export const fetchCurrentFilms = () => async dispatch => {
     console.log(await response.data);
 
     dispatch({ type: 'FETCH_CURRENT_FILMS_SUCCESS', payload: response.data.results});
-}
+};
+
+export const setFilmToBook = (filmId) => (
+    {
+        type: 'FILM_TO_BOOK_CHOSEN',
+        payload: filmId
+    }
+);
+
+export const setTimeOfBooking = (time) => (
+    {
+        type: 'TIME_OF_BOOKING_CHOSEN',
+        payload: time
+    }
+);
