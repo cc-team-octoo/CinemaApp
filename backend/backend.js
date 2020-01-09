@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-mongoose.connect("link")
+mongoose.connect("mongodb+srv://coderscamp:coderscamp123@movie-blnwm.gcp.mongodb.net/cinema?retryWrites=true&w=majority")
     .then(() => {
         console.log("Connected to MongoDb...")
     })
@@ -52,50 +52,8 @@ const movieSchema = new mongoose.Schema({
         default: Date.now
     }
 })
-//tworzenie filmów
-const Movie = mongoose.model("Movie", movieSchema);
-// - tworzy seanse dla filmów pobranych z api - zasadniczo przyjmuje imie, nazwę studia, tablicę tagów i tablicę godzin seansów. Tworzy tablicę miejsc wolnych i pustą tablice miejsc zarezerwowanych 
-async function createMovie(name, studio, tagsArray, hoursArray) {
-    const movie = new Movie({
-        name: name,
-        studio: studio,
-        hours: await hoursArray.map(element => {
-            return ({
-                hour: element,
-                seats: [
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //A
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //B
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //C
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //D
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //E
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //F
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //G
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //H
-                ],
-                reservedSeats: [
-                    [], //A
-                    [], //B
-                    [], //C
-                    [], //D
-                    [], //E
-                    [], //F
-                    [], //G
-                    [], //H]
-                ],
-            })
-        }),
-        tags: tagsArray
-    })
-    try {
-        const result = await movie.save()
-        console.log(result)
-    } catch (err) {
-        console.log(err.message)
-    }
 
-}
-//createMovie("Star Wars", "Disney", ["Sci-fi", "disney", "baby yoda"], [10, 12, 17, 20]);
-//createMovie("Lord Of the Ring", "Mordor Company", ["fantsy", "we taking the hobbits to isengard", "Gandalf"], [13, 16, 21, 24]);
+const Movie = mongoose.model("Movie", movieSchema);
 
 // get Movies- wyświetla wszystkie filmy
 async function getMovies() {
@@ -148,13 +106,6 @@ async function updateCourse(id, hour, reserveSeats, reservedSeatsIndex) {
 
 //expressRoute
 
-
-
-
-
-
-
-
 app.get("/", (req, res) => {
     res.send("Hello World")
 })
@@ -199,6 +150,7 @@ app.post('/api/movies', async (req, res) => {
     await movie.save()
     res.send(movie)
 })
+
 app.put("/api/movies/:id", async (req, res) => {
     let error = false;
     const movie = await Movie.findById(req.params.id);
