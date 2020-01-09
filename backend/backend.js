@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb+srv://coderscamp:coderscamp123@movie-blnwm.gcp.mongodb.net/cinema?retryWrites=true&w=majority")
+mongoose.connect("magic link")
     .then(() => {
         console.log("Connected to MongoDb...")
     })
@@ -70,18 +70,6 @@ app.get("/api/movies/:name", async (req, res) => {
     res.send(movie)
 });
 
-function createArray() {
-    const seats = []
-    const rows = ["A", "B", "C", "D", "E", "F", "G", "H"]
-    rows.forEach((row) => {
-        console.log(row)
-        for (let i = 1; i <= 10; i++) {
-            console.log(row)
-            seats.push(`${i}${row}`)
-        }
-    })
-    return seats
-}
 
 
 app.post('/api/movies', async (req, res) => {
@@ -203,4 +191,19 @@ const reservedSeats = ["1A", "1B", "8C"]
 
 
 updateCourse("5e1783f9326607139e21c7f1", 10, reservedSeats)
+
+
+function createArray() {
+    const seats = []
+    const rows = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    rows.forEach((row) => {
+        console.log(row)
+        for (let i = 1; i <= 10; i++) {
+            console.log(row)
+            seats.push(`${i}${row}`)
+        }
+    })
+    return seats
+}
+
 */
