@@ -13,13 +13,17 @@ class SeanceRoom extends Component {
         this.state = {taken: ['1A', '7C']}
     }
 
+    onFormSubmit = formValues => {
+        console.log(`You made a reservation of seats: . Username: ${formValues.username} email address: ${formValues.email}`)
+    }
+    
     render() {
         return (
             <div>
                 <h1>Choose your seats for the movie</h1>
                 <StyledScreen>screen</StyledScreen>
                 <Room taken={this.state.taken}/>
-                <ReservationFrom />
+                <ReservationFrom onFormSubmit={this.onFormSubmit} />
             </div>
         ) 
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledResInfo } from './Styled'
+import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledResInfo, StyledSeatsInfo } from './Styled'
 
 const validate = formValues => {
     const { username, email } = formValues;
@@ -30,19 +30,30 @@ const renderField = ({
     </div>
 )
 
+const renderSeatsInfo = ({ input, type }) => (
+    <div>
+        <StyledSeatsInfo {...input} value={['21M']} type={type} disabled/>
+    </div>
+)
+
 const ReservationForm = props => {
     const { handleSubmit, pristine, submitting } = props
-    const onSubmit = formValues => console.log(`You made a reservation of seats: . It's been registered under the name of ${formValues.username} and a confirmation email was sent to an address: ${formValues.email}`)
     return (
         <StyledFormContainer>
             <h2>Reservation form</h2>
             <StyledResInfo>To make a reservation, please put here your name and email address so we can send you a confirmation message with all further details</StyledResInfo>
-            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+            <StyledForm onSubmit={handleSubmit(props.onFormSubmit)}>
                 <Field
-                name="username"
-                type="text"
-                component={renderField}
-                label="username"
+                    name="takenSeats"
+                    type="text"
+                    component={renderSeatsInfo}
+                    label="takenSeats"
+                />
+                <Field
+                    name="username"
+                    type="text"
+                    component={renderField}
+                    label="username"
                 />
                 <Field 
                     name="email" 

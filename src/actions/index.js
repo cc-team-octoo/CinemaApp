@@ -5,4 +5,4 @@ export const fetchCurrentFilms = () => async dispatch => {
     console.log(await response.data);
 
     dispatch({ type: 'FETCH_CURRENT_FILMS_SUCCESS', payload: response.data.results});
-}
+};

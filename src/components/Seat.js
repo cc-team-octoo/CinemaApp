@@ -8,7 +8,6 @@ class Seat extends Component {
         super(props);
         this.state = { checked: false };
         this.handleCheckboxChange.bind(this);
-        // this.checkTaken.bind(this);
     }  
 
     handleCheckboxChange = async event => {
@@ -21,16 +20,9 @@ class Seat extends Component {
             const i = takenSeats.indexOf(seatId);
             if(i !== -1) {takenSeats.splice(i, 1)};
         }
-            console.log(`Seat number ${this.props.id}${this.props.rowName} was unchecked`);
         console.log(takenSeats)
     }   
-    
-    // checkTaken = () => {
-    //     const seatId = `${this.props.id}${this.props.rowName}`;
-    //     const taken = this.props.indexOf(seatId) > -1
-    // }
-
-    
+       
     render() {
         const seatId = `${this.props.id}${this.props.rowName}`;
         const taken = this.props.taken.indexOf(seatId) > -1;

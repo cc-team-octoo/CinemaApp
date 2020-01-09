@@ -98,6 +98,13 @@ export const StyledResInfo = styled.p`
   margin: 1rem 0;
 `;
 
+export const StyledSeatsInfo = styled.input`
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  margin-bottom: 10px;
+`;
+
 export const StyledInput = styled.input`
   border: 1px solid grey;
   border-radius: 5px;
