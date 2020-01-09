@@ -23,7 +23,7 @@ export const StyledSeat = styled.div`
   margin: 3px 2px;
   display: inline-block;
   cursor: pointer;
-  color: ${props => props.disabled ? 'transparent' : props.checked ? 'black' : 'transparent'};
+  color: ${props => props.disabled ? 'transparent' : props.checked ? '#fafafa' : 'transparent'};
   font-size: 12px;
   line-height: 20px;
   text-align: center;
