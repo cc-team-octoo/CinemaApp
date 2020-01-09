@@ -9,7 +9,8 @@ const Row = (props) => {
             <Seat 
                 id={i+1} 
                 key={`seat${i+1}`}
-                rowName={props.rowName}>
+                rowName={props.rowName}
+                taken={props.taken}>
             </Seat>);
     }
 return <StyledRow rowName={props.rowName}>{row}</StyledRow>
