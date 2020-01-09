@@ -1,9 +1,12 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Row from './Row';
-import { StyledRoom, StyledScreen } from './Styled';
 import ReservationFrom from './ReservationForm'
+import { StyledRoom, StyledScreen } from './Styled';
 
 const SeanceRoom = () => {
+    const {id} = useParams();
+    console.log(id);
     let room = [];
     let rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     for (let i = 0; i < 8; i++) {
