@@ -19,18 +19,24 @@ class Seat extends Component {
     
     // checkTaken = () => {
     //     const seatId = `${this.props.id}${this.props.rowName}`;
-    //     this.props.indexOf(seatId) > -1 ? true : false;
+    //     const taken = this.props.indexOf(seatId) > -1
     // }
 
     
     render() {
+        const seatId = `${this.props.id}${this.props.rowName}`;
+        const taken = this.props.taken.indexOf(seatId) > -1;
+
         return (
             <CheckboxContainer
-                checked={this.state.checked}>
+                checked={taken || this.state.checked}>
                     <HiddenCheckbox 
-                        checked={this.state.checked}
-                        onChange={this.handleCheckboxChange}/>
-                    <StyledSeat checked={this.state.checked}>{this.props.id}</StyledSeat>
+                        checked={taken || this.state.checked}
+                        onChange={this.handleCheckboxChange}
+                        disabled={taken}/>
+                    <StyledSeat checked={taken || this.state.checked} disabled={taken}>
+                        {this.props.id}
+                    </StyledSeat>
             </CheckboxContainer>
         ) 
     }

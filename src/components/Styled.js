@@ -19,11 +19,11 @@ export const StyledSeat = styled.div`
   height: 20px;
   width: 20px;
   border-radius: 5px;
-  background-color: ${props => props.checked ? 'black' : 'green'};
+  background-color: ${props => props.disabled ? 'rgba(47, 72, 88, .6)' : props.checked ? 'black' : 'green'};
   margin: 3px 2px;
   display: inline-block;
   cursor: pointer;
-  color: ${props => props.checked ? '#fafafa' : 'green'};
+  color: ${props => props.disabled ? 'transparent' : props.checked ? 'black' : 'transparent'};
   font-size: 12px;
   line-height: 20px;
   text-align: center;
@@ -31,8 +31,8 @@ export const StyledSeat = styled.div`
   transition: background-color .1s;
 
   &:hover {
-      color: #fafafa;
-      background-color: purple;
+      color: ${props => props.disabled ? 'transparent' : '#fafafa'};
+      background-color: ${props => props.disabled ? 'rgba(47, 72, 88, .6)' : 'purple'};
   }
 
   @media (min-width: 400px) {

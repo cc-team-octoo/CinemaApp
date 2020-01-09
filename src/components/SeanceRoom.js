@@ -10,7 +10,7 @@ class SeanceRoom extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {taken: '1A'}
+        this.state = {taken: ['1A', '7C']}
     }
 
     render() {
