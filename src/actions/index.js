@@ -5,7 +5,7 @@ export const fetchCurrentFilms = () => async dispatch => {
     console.log(await response.data.results);
 
     const createMovie = function (movie) {
-        fetch("http://localhost:3000/api/movies", {
+        fetch("http://localhost:8000/api/movies", {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -13,7 +13,7 @@ export const fetchCurrentFilms = () => async dispatch => {
             body: JSON.stringify({
                 name: movie.title,
                 overview: movie.overview,
-                hoursArray: [10, 12, 17, 20]
+                hoursArray: [4, 6.5, 9]
             })
         })
     }
