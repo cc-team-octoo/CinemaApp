@@ -1,25 +1,62 @@
 * {
   box-sizing: border-box;
-  margin: 0;
+  margin: 10 auto;
   padding: 0;
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
 }
 
 h1 {
   text-align: center;
   margin: 1rem;
+  margin-bottom: 40px;
 }
 
 ol {
   display: grid;
-  grid: repeat(5, 1fr) / repeat(4, 1fr)
+  grid: repeat(5, auto) / repeat(4, 1fr);
 }
 
 li {
+  height: 100%;
+  padding: 0 10px;
+  text-align: justify;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+}
+
+.film-title {
+  font-weight: bold;
+}
+
+li span {
+  margin-bottom: 10px;
+}
+
+li span:nth-child(3) {
+  flex-grow: 1;
+}
+
+li span:last-child {
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+button {
+  background-color: white;
+  border: solid 1px black;
+  font-size: 14px;
+  padding: 1px;
+  margin: 1px;
+  transition: 0.4s;
+}
+
+button:hover {
+  color: white;
+  background-color: black;
 }
