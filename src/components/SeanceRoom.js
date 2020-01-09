@@ -1,6 +1,6 @@
 import React from 'react';
 import Row from './Row';
-import { StyledRoom } from './Styled';
+import { StyledRoom, StyledScreen } from './Styled';
 import ReservationFrom from './ReservationForm'
 
 const SeanceRoom = () => {
@@ -14,6 +14,8 @@ const SeanceRoom = () => {
 
     return (
         <div>
+            <h1>Choose your seats for the movie</h1>
+            <StyledScreen>screen</StyledScreen>
             <StyledRoom>{room}</StyledRoom>
             <ReservationFrom />
         </div>

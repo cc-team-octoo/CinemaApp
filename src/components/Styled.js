@@ -1,30 +1,45 @@
 import styled from 'styled-components';
 
+export const StyledScreen = styled.div`
+  text-align: center;
+  color: #fafafa;
+  background-color: #000;
+  width: 280px;
+  border-radius: 5px;
+  font-size: .8rem;
+  padding: 2px;
+  margin: auto;
+
+  @media (min-width: 400px) {
+    width: 350px;
+  }
+`;
+
 export const StyledSeat = styled.div`
-    height: 20px;
-    width: 20px;
-    border-radius: 5px;
-    background-color: ${props => props.checked ? 'black' : 'green'};
-    margin: 3px 2px;
-    display: inline-block;
-    cursor: pointer;
-    color: ${props => props.checked ? '#fafafa' : 'green'};
-    font-size: 12px;
-    line-height: 20px;
-    text-align: center;
-    user-select: none;
-    transition: background-color .1s;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  background-color: ${props => props.checked ? 'black' : 'green'};
+  margin: 3px 2px;
+  display: inline-block;
+  cursor: pointer;
+  color: ${props => props.checked ? '#fafafa' : 'green'};
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  user-select: none;
+  transition: background-color .1s;
 
-    &:hover {
-        color: #fafafa;
-        background-color: purple;
-    }
+  &:hover {
+      color: #fafafa;
+      background-color: purple;
+  }
 
-    @media (min-width: 400px) {
-      height: 30px;
-      width: 30px;
-      line-height: 30px;
-    }
+  @media (min-width: 400px) {
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+  }
 `;
 
 export const CheckboxContainer = styled.label`
