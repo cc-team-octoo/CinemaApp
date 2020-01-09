@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb+srv://coderscamp:coderscamp123@movie-blnwm.gcp.mongodb.net/cinema?retryWrites=true&w=majority")
+mongoose.connect("link")
     .then(() => {
         console.log("Connected to MongoDb...")
     })
@@ -21,7 +21,9 @@ mongoose.connect("mongodb+srv://coderscamp:coderscamp123@movie-blnwm.gcp.mongodb
 const movieSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        dropDups: true,
     },
     hours: [{
         hour: Number,
@@ -54,22 +56,9 @@ const movieSchema = new mongoose.Schema({
 })
 
 const Movie = mongoose.model("Movie", movieSchema);
-
-// get Movies- wyświetla wszystkie filmy
-async function getMovies() {
-    const movies = await Movie.find();
-    console.log(movies)
-}
-//getMovies() 
-//get movie by Name - wyświetla film znaleziony po imieniu 
-async function getMoviesNames(name) {
-    const movies = await Movie
-        .find({
-            name: name
-        });
-    console.log(movies)
-}
-//getMoviesNames()
+Movie.init().then(() => {
+    // safe to create users now.
+});
 
 //update- reserve seats
 async function updateCourse(id, hour, reserveSeats, reservedSeatsIndex) {
@@ -141,8 +130,26 @@ app.post('/api/movies', async (req, res) => {
         hours: await req.body.hoursArray.map(element => {
             return ({
                 hour: element,
-                seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                reservedSeats: [],
+                seats: [
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                ],
+                reservedSeats: [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ]
             })
         }),
         overview: req.body.overview
@@ -194,3 +201,22 @@ app.delete("/api/movies/:id", async (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log("Listening on port...")
 })
+/*
+//helper functions - delete later
+
+// get Movies- wyświetla wszystkie filmy
+async function getMovies() {
+    const movies = await Movie.find();
+    console.log(movies)
+}
+//getMovies() 
+//get movie by Name - wyświetla film znaleziony po imieniu 
+async function getMoviesNames(name) {
+    const movies = await Movie
+        .find({
+            name: name
+        });
+    console.log(movies)
+}
+//getMoviesNames()
+*/
