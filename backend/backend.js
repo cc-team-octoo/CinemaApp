@@ -27,26 +27,7 @@ const movieSchema = new mongoose.Schema({
     },
     hours: [{
         hour: Number,
-        seats: [
-            [Number], //A
-            [Number], //B
-            [Number], //C
-            [Number], //D
-            [Number], //E
-            [Number], //F
-            [Number], //G
-            [Number], //H
-        ],
-        reservedSeats: [
-            [], //A
-            [], //B
-            [], //C
-            [], //D
-            [], //E
-            [], //F
-            [], //G
-            [], //H
-        ],
+        reservedSeats: [],
     }],
     overview: String,
     date: {
@@ -89,6 +70,20 @@ app.get("/api/movies/:name", async (req, res) => {
     res.send(movie)
 });
 
+function createArray() {
+    const seats = []
+    const rows = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    rows.forEach((row) => {
+        console.log(row)
+        for (let i = 1; i <= 10; i++) {
+            console.log(row)
+            seats.push(`${i}${row}`)
+        }
+    })
+    return seats
+}
+
+
 app.post('/api/movies', async (req, res) => {
     console.log(req.body)
     const schema = {
@@ -104,30 +99,12 @@ app.post('/api/movies', async (req, res) => {
     }
 
     const movie = new Movie({
+
         name: req.body.name,
         hours: await req.body.hoursArray.map(element => {
             return ({
                 hour: element,
-                seats: [
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                ],
-                reservedSeats: [
-                    [],
-                    [],
-                    [],
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
-                ]
+                reservedSeats: [],
             })
         }),
         overview: req.body.overview
@@ -136,37 +113,31 @@ app.post('/api/movies', async (req, res) => {
     res.send(movie)
 })
 
-app.put("/api/movies/:id", async (req, res) => {
-    let error = false;
-    const movie = await Movie.findById(req.params.id);
+app.put("/api/movies/:name", async (req, res) => {
+    const movie = await Movie.find({
+        name: req.params.name
+    });
     if (!movie) {
         res.status(404).send("The movie with the given Id ws not found")
         return
     }
     const result = movie.hours.find(elem => {
-        if (elem.hour === req.params.hour) {
+        if (elem.hour === req.body.hour) {
             return elem
         }
     })
-    let seats = await result.seats.filter((el) => {
-        return req.params.reserveSeats.indexOf(el) === -1;
-    });
-    result.seats = seats
-    await req.params.id.reserveSeats.forEach(elem => {
-        if (result.reservedSeats.indexOf(elem) !== -1) {
-            error = true;
-            return
-        } else {
+    console.log(result, req.body.seatsToReserve)
+
+    req.body.seatsToReserve.forEach((elem) => {
+        if (result.reservedSeats.indexOf(elem) === -1) {
             result.reservedSeats.push(elem)
         }
-    })
-    if (error === false) {
-        const updatedMovie = await movie.save()
-        res.send(updatedMovie)
-    } else {
-        console.log("seats are taken please choose another")
-    }
 
+    })
+    console.log(result.reservedSeats)
+
+    const updatedMovie = await movie.save()
+    console.log(updatedMovie)
 })
 
 app.delete("/api/movies/:id", async (req, res) => {
@@ -177,50 +148,12 @@ app.delete("/api/movies/:id", async (req, res) => {
     }
     res.send(movie)
 });
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 8000, () => {
     console.log("Listening on port...")
 })
 
-async function updateCourse(id, hour, seatsToReserve) {
-    let error = false;
-    const movie = await Movie.findById(id);
-    if (!movie) return;
-    const result = await movie.hours.find(elem => {
-        if (elem.hour === hour) {
-            return elem
-        }
-
-    })
-    for (const row in seatsToReserve) {
-        let seats = result.seats[row].filter((el) => {
-            return seatsToReserve[row].indexOf(el) === -1;
-        });
-
-        result.seats[row] = seats
-
-        console.log(result)
-        if (await result.reservedSeats[row].indexOf(await seatsToReserve[row]) !== -1) {
-            error = true
-            return
-        } else {
-            await result.reservedSeats[row].push(await seatsToReserve[row])
-        }
-    }
 
 
-    if (error === false) {
-        const updatedMovie = await movie.save()
-       // console.log(updatedMovie)
-    } else {
-        console.log("seats are taken please choose another")
-    }
-
-}
-const reservedSeats = {
-    0: [1, 5, 6],
-    1: [1, 2, 3]
-}
-updateCourse("5e168b06460e43358eaec30d", 20, reservedSeats)
 
 /*
 //helper functions - delete later
@@ -240,4 +173,34 @@ async function getMoviesNames(name) {
     console.log(movies)
 }
 //getMoviesNames()
+
+
+async function updateCourse(id, hour, seatsToReserve) {
+    const movie = await Movie.findById(id);
+    if (!movie) return;
+    const result = await movie.hours.find(elem => {
+        if (elem.hour === hour) {
+            return elem
+        }
+
+    })
+    console.log(result, seatsToReserve)
+
+    seatsToReserve.forEach((elem) => {
+        if (result.reservedSeats.indexOf(elem) === -1) {
+            result.reservedSeats.push(elem)
+        }
+
+    })
+    console.log(reservedSeats)
+
+    const updatedMovie = await movie.save()
+    console.log(updatedMovie)
+
+
+}
+const reservedSeats = ["1A", "1B", "8C"]
+
+
+updateCourse("5e1783f9326607139e21c7f1", 10, reservedSeats)
 */
