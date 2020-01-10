@@ -15,11 +15,12 @@ const App = () => {
                     <Switch>
                         <Route path="/" exact component={FilmsNowInTheatres} />
                         <Route path="/film" exact component={Film} />
+                        <Route path="/seats" exact component={SeanceRoom} />
                         {/* <Route path="/seats/:id" exact component={SeanceRoom} /> */}
-                        {currentFilms.map((film, i) => {
+                        {/* {currentFilms.map((film, i) => {
                             let path = `/seats/${film.id}/:hour`;
                             return <Route key={i} path={path} exact component={SeanceRoom} />
-                        })}
+                        })} */}
                     </Switch>
                 </div>
             </HashRouter>

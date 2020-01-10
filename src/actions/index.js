@@ -20,3 +20,10 @@ export const setTimeOfBooking = (time) => (
         payload: time
     }
 );
+
+export const setTakenSeats = (takenSeats) => (
+    {
+        type: 'GET_TAKEN_SEATS',
+        payload: takenSeats
+    }
+);

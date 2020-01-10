@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setTakenSeats } from '../actions';
 import { StyledSeat, CheckboxContainer, HiddenCheckbox } from './Styled';
+
+const mapDispatchToProps = { setTakenSeats }
+
+const takenSeats = [];
 
 class Seat extends Component {
     constructor(props) {
@@ -10,22 +16,35 @@ class Seat extends Component {
 
     handleCheckboxChange = async event => {
         await this.setState({ checked: event.target.checked });
-        this.state.checked ? 
-            console.log(`Seat number ${this.props.id}${this.props.rowName} is checked`) : 
-            console.log(`Seat number ${this.props.id}${this.props.rowName} was unchecked`)
-    }        
-    
+
+        const seatId = `${this.props.id}${this.props.rowName}`; 
+        if(this.state.checked) {
+            takenSeats.push(seatId)
+        } else {
+            const i = takenSeats.indexOf(seatId);
+            if(i !== -1) {takenSeats.splice(i, 1)};
+        }
+        console.log(takenSeats)
+        this.props.setTakenSeats(takenSeats);
+    }   
+       
     render() {
+        const seatId = `${this.props.id}${this.props.rowName}`;
+        const taken = this.props.taken.indexOf(seatId) > -1;
+
         return (
             <CheckboxContainer
-                checked={this.state.checked}>
+                checked={taken || this.state.checked}>
                     <HiddenCheckbox 
-                        checked={this.state.checked}
-                        onChange={this.handleCheckboxChange}/>
-                    <StyledSeat checked={this.state.checked}>{this.props.id}</StyledSeat>
+                        checked={taken || this.state.checked}
+                        onChange={this.handleCheckboxChange}
+                        disabled={taken}/>
+                    <StyledSeat checked={taken || this.state.checked} disabled={taken}>
+                        {this.props.id}
+                    </StyledSeat>
             </CheckboxContainer>
         ) 
     }
 }
 
-export default Seat;
+export default connect(null, mapDispatchToProps)(Seat);

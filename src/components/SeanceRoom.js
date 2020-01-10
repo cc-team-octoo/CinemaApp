@@ -1,16 +1,32 @@
-import React from 'react';
-import Row from './Row';
-import { StyledRoom } from './Styled';
+import React, { Component } from 'react';
+// import { useParams } from 'react-router-dom';
+import { StyledScreen } from './Styled';
+import Room from './Room'
+import ReservationFrom from './ReservationForm';
 
+class SeanceRoom extends Component {
+    // const {id} = useParams();
+    // console.log(id);
 
-const SeanceRoom = () => {
-    let room = [];
-    let rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    for (let i = 0; i < 8; i++) {
-        room.push(<Row rowName={rows[i]}/>)
-    };
+    constructor(props) {
+        super(props);
+        this.state = {taken: ['1A', '7C']}
+    }
 
-    return <StyledRoom>{room}</StyledRoom>
+    onFormSubmit = formValues => {
+        console.log(`You made a reservation of seats: . Username: ${formValues.username} email address: ${formValues.email}`)
+    }
+    
+    render() {
+        return (
+            <div>
+                <h1>Choose your seats for the movie</h1>
+                <StyledScreen>screen</StyledScreen>
+                <Room taken={this.state.taken}/>
+                <ReservationFrom onFormSubmit={this.onFormSubmit} />
+            </div>
+        ) 
+    }
 };
 
 export default SeanceRoom;
