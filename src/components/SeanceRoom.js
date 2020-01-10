@@ -44,7 +44,6 @@ class SeanceRoom extends Component {
                 <StyledScreen>screen</StyledScreen>
                 <Room taken={this.state.taken}/>
                 <ReservationFrom onFormSubmit={this.onFormSubmit} />
-                <p>{this.props.takenSeats}</p>
             </div>
         ) 
     }
