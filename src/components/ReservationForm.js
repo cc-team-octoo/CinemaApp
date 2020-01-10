@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledInfo } from './Styled'
 
-
 const validate = formValues => {
     const { username, email } = formValues;
     const errors = {};
