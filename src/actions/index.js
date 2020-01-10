@@ -6,3 +6,11 @@ export const fetchCurrentFilms = () => async dispatch => {
 
     dispatch({ type: 'FETCH_CURRENT_FILMS_SUCCESS', payload: response.data.results});
 };
+
+
+export const setTakenSeats = (takenSeats) => (
+    {
+        type: 'GET_TAKEN_SEATS',
+        payload: takenSeats
+    }
+);
