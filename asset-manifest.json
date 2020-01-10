@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/CinemaApp/static/css/main.29a56fb2.chunk.css",
+    "main.js": "/CinemaApp/static/js/main.99ee264f.chunk.js",
+    "main.js.map": "/CinemaApp/static/js/main.99ee264f.chunk.js.map",
+    "runtime-main.js": "/CinemaApp/static/js/runtime-main.16ea2d5c.js",
+    "runtime-main.js.map": "/CinemaApp/static/js/runtime-main.16ea2d5c.js.map",
+    "static/js/2.9c4d8059.chunk.js": "/CinemaApp/static/js/2.9c4d8059.chunk.js",
+    "static/js/2.9c4d8059.chunk.js.map": "/CinemaApp/static/js/2.9c4d8059.chunk.js.map",
+    "index.html": "/CinemaApp/index.html",
+    "precache-manifest.8516a179d913661d0aa115daf1731723.js": "/CinemaApp/precache-manifest.8516a179d913661d0aa115daf1731723.js",
+    "service-worker.js": "/CinemaApp/service-worker.js",
+    "static/css/main.29a56fb2.chunk.css.map": "/CinemaApp/static/css/main.29a56fb2.chunk.css.map",
+    "static/js/2.9c4d8059.chunk.js.LICENSE": "/CinemaApp/static/js/2.9c4d8059.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.16ea2d5c.js",
+    "static/js/2.9c4d8059.chunk.js",
+    "static/css/main.29a56fb2.chunk.css",
+    "static/js/main.99ee264f.chunk.js"
+  ]
+}
