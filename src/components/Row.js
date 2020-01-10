@@ -8,8 +8,9 @@ const Row = (props) => {
         row.push(
             <Seat 
                 id={i+1} 
-                key={i+1}
-                rowName={props.rowName}>
+                key={`seat${i+1}`}
+                rowName={props.rowName}
+                taken={props.taken}>
             </Seat>);
     }
 return <StyledRow rowName={props.rowName}>{row}</StyledRow>
