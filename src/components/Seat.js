@@ -10,6 +10,7 @@ class Seat extends Component {
         super(props);
         this.state = { checked: false };
         this.handleCheckboxChange.bind(this);
+        // this.checkTaken.bind(this);
     }  
 
     handleCheckboxChange = async event => {
