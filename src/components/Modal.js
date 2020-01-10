@@ -18,9 +18,9 @@ class Modal extends Component {
             <ModalBckg>
                 <StyledModal>
                     <h2>The confirmation email was sent</h2>
-                    <StyledInfo>You reserved {this.props.seats} seats for a movie:</StyledInfo>
+                    <StyledInfo>You reserved {this.props.seats} seats for the movie:</StyledInfo>
                     <StyledTitle>"{this.props.film}"</StyledTitle>
-                    <StyledInfo>The seance will take place at {this.props.time}</StyledInfo>
+                    <StyledInfo>The screening will take place at {this.props.time}</StyledInfo>
                     <Link to='/'>
                         <StyledButton onClick={this.handleClick}>OK</StyledButton>
                     </Link>
