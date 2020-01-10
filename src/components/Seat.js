@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setTakenSeats } from '../actions';
 import { StyledSeat, CheckboxContainer, HiddenCheckbox } from './Styled';
+
+const mapDispatchToProps = { setTakenSeats }
 
 const takenSeats = [];
 
@@ -21,6 +25,7 @@ class Seat extends Component {
             if(i !== -1) {takenSeats.splice(i, 1)};
         }
         console.log(takenSeats)
+        this.props.setTakenSeats(takenSeats);
     }   
        
     render() {
@@ -42,4 +47,4 @@ class Seat extends Component {
     }
 }
 
-export default Seat;
+export default connect(null, mapDispatchToProps)(Seat);
