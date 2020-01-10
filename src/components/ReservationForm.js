@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledResInfo, StyledSeatsInfo } from './Styled'
 
 const validate = formValues => {
@@ -25,52 +26,67 @@ const renderField = ({
     meta: { touched, error }
     }) => (
     <div>
-        <StyledInput {...input} placeholder={label} type={type} autoComplete="off" />
+        <StyledInput {...input} placeholder={label} type={type} autoComplete='off' />
         {touched && error && <StyledError>{error}</StyledError>}
     </div>
 )
 
 const renderSeatsInfo = ({ input, type }) => (
     <div>
-        <StyledSeatsInfo {...input} value={['21M']} type={type} disabled/>
+        <StyledSeatsInfo {...input} type={type} disabled/>
     </div>
 )
 
-const ReservationForm = props => {
-    const { handleSubmit, pristine, submitting } = props
-    return (
-        <StyledFormContainer>
-            <h2>Reservation form</h2>
-            <StyledResInfo>To make a reservation, please put here your name and email address so we can send you a confirmation message with all further details</StyledResInfo>
-            <StyledForm onSubmit={handleSubmit(props.onFormSubmit)}>
-                <Field
-                    name="takenSeats"
-                    type="text"
-                    component={renderSeatsInfo}
-                    label="takenSeats"
-                />
-                <Field
-                    name="username"
-                    type="text"
-                    component={renderField}
-                    label="username"
-                />
-                <Field 
-                    name="email" 
-                    type="email" 
-                    component={renderField} 
-                    label="email" />
-                <div>
-                <StyledButton type="submit" disabled={pristine || submitting}>
-                    Submit
-                </StyledButton>
-                </div>
-            </StyledForm>
-      </StyledFormContainer>
-    )
-  }
+class ReservationForm extends Component {
+    render() {
+        const { handleSubmit, pristine, submitting } = this.props
+        return (
+            <StyledFormContainer>
+                <h2>Reservation form</h2>
+                <StyledResInfo>To make a reservation, please put here your name and email address so we can send you a confirmation message with all further details</StyledResInfo>
+                <StyledForm onSubmit={handleSubmit(this.props.onFormSubmit)}>
+                    <Field
+                        name="takenSeats"
+                        type="text"
+                        component={renderSeatsInfo}
+                        label="takenSeats"
+                    />
+                    <Field
+                        name="username"
+                        type="text"
+                        component={renderField}
+                        label="username"
+                    />
+                    <Field 
+                        name="email" 
+                        type="email" 
+                        component={renderField} 
+                        label="email" />
+                    <StyledButton type="submit" disabled={pristine || submitting}>
+                        Submit
+                    </StyledButton>
+                </StyledForm>
+            </StyledFormContainer>
+        )
+    }
+}
 
-export default reduxForm ({
+function mapStateToProps(state){
+    console.log(state.takenSeats)
+    return {
+        takenSeats: state.takenSeats
+    }
+};
+
+
+ReservationForm = reduxForm ({
     form: 'reservationForm',
-    validate
+    validate,
+    initialValues: {takenSeats: 'tu potrzebuję takenSeats'}
 })(ReservationForm);
+
+// ReservationForm = connect(
+//     state => ({ initialValues: {takenSeats: state.takenSeats}})
+// )(ReservationForm);
+
+export default connect(mapStateToProps)(ReservationForm);
