@@ -1,4 +1,4 @@
-const takenSeatsReducer = (state = '', action) => {
+const takenSeatsReducer = (state = ' ', action) => {
     switch(action.type) {
         case 'GET_TAKEN_SEATS':
             return {

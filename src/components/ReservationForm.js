@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledResInfo } from './Styled'
+import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledInfo } from './Styled'
 
 
 const validate = formValues => {
@@ -38,7 +37,7 @@ class ReservationForm extends Component {
         return (
             <StyledFormContainer>
                 <h2>Reservation form</h2>
-                <StyledResInfo>To make a reservation, please put here your name and email address so we can send you a confirmation message with all further details</StyledResInfo>
+                <StyledInfo>To make a reservation, please put here your name and email address so we can send you a confirmation message with all further details</StyledInfo>
                 <StyledForm onSubmit={handleSubmit(this.props.onFormSubmit)}>
                     <Field
                         name="username"
@@ -60,16 +59,9 @@ class ReservationForm extends Component {
     }
 }
 
-function mapStateToProps(state){
-    console.log(state.takenSeats)
-    return {
-        takenSeats: state.takenSeats
-    }
-};
-
 ReservationForm = reduxForm ({
     form: 'reservationForm',
     validate
 })(ReservationForm);
 
-export default connect(mapStateToProps)(ReservationForm);
+export default ReservationForm;

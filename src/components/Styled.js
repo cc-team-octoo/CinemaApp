@@ -94,7 +94,7 @@ export const StyledForm = styled.form`
   margin-top: 10px;
 `;
 
-export const StyledResInfo = styled.p`
+export const StyledInfo = styled.p`
   margin: 1rem 0;
 `;
 
@@ -157,7 +157,6 @@ export const ModalBckg = styled.div`
   top: 0;
   display: flex;
   justify-content: center;
-  aling-content: center;
 `;
 
 export const StyledModal = styled.div`
@@ -165,4 +164,12 @@ export const StyledModal = styled.div`
   height: fit-content;
   border: 2px solid #2F4858;
   border-radius: 5px; 
+  padding: 1.5rem;
+  margin-top: 20vh;
+  text-align: center;
+`;
+
+export const StyledTitle = styled.p`
+  font-size: 1.2rem;
+  font-weight: 400;
 `;

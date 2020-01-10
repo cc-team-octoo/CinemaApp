@@ -4,11 +4,13 @@ import currentFilmsReducer from './currentFilms';
 import bookedFilm from './bookedFilm';
 import bookingTime from './bookingTime';
 import takenSeats from './takenSeats';
+import bookedTitle from './bookedFilmTitle'
 
 export default combineReducers({
     form: formReducer,
     currentFilms: currentFilmsReducer,
     bookedFilm,
     bookingTime,
-    takenSeats
+    takenSeats,
+    bookedTitle
 });

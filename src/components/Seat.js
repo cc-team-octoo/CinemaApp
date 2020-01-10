@@ -24,7 +24,6 @@ class Seat extends Component {
             const i = takenSeats.indexOf(seatId);
             if(i !== -1) {takenSeats.splice(i, 1)};
         }
-        console.log(takenSeats)
         this.props.setTakenSeats(takenSeats);
     }   
        

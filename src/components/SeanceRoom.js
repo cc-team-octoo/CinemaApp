@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { StyledScreen } from './Styled';
 import Room from './Room';
 import ReservationFrom from './ReservationForm';
@@ -26,7 +27,13 @@ class SeanceRoom extends Component {
     render() {
         return (
             <div>
-                {this.state.showModal && <Modal />}
+                {this.state.showModal && 
+                    <Modal 
+                        film={this.props.bookedTitle}
+                        seats={this.props.takenSeats.length}
+                        time={this.props.bookingTime}
+                    />
+                }
                 <h1>Choose your seats for the movie</h1>
                 <StyledScreen>screen</StyledScreen>
                 <Room taken={this.state.taken}/>
@@ -36,4 +43,14 @@ class SeanceRoom extends Component {
     }
 };
 
-export default SeanceRoom;
+function mapStateToProps(state){
+    // console.log(state)
+    return {
+        takenSeats: state.takenSeats.takenSeats,
+        bookedFilm: state.bookedFilm,
+        bookingTime: state.bookingTime,
+        bookedTitle: state.bookedTitle
+    }
+};
+
+export default connect(mapStateToProps)(SeanceRoom);
