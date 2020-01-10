@@ -28,9 +28,22 @@ export const setTimeOfBooking = time => (
     }
 );
 
-export const setTakenSeats = takenSeats => (
+export const addTakenSeat = seatId => (
     {
-        type: 'GET_TAKEN_SEATS',
-        payload: takenSeats
+        type: 'ADD_TAKEN_SEAT',
+        payload: seatId
+    }
+);
+
+export const removeTakenSeat = seatId => (
+    {
+        type: 'REMOVE_TAKEN_SEAT',
+        payload: seatId
+    }
+);
+
+export const resetTakenSeats = () => (
+    {
+        type: 'RESET_TAKEN_SEATS'
     }
 );

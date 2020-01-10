@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setTakenSeats } from '../actions';
+import { addTakenSeat, removeTakenSeat } from '../actions';
 import { StyledSeat, CheckboxContainer, HiddenCheckbox } from './Styled';
 
-const mapDispatchToProps = { setTakenSeats }
-
-const takenSeats = [];
+const mapDispatchToProps = { addTakenSeat, removeTakenSeat }
 
 class Seat extends Component {
     constructor(props) {
@@ -16,15 +14,8 @@ class Seat extends Component {
 
     handleCheckboxChange = async event => {
         await this.setState({ checked: event.target.checked });
-
         const seatId = `${this.props.id}${this.props.rowName}`; 
-        if(this.state.checked) {
-            takenSeats.push(seatId)
-        } else {
-            const i = takenSeats.indexOf(seatId);
-            if(i !== -1) {takenSeats.splice(i, 1)};
-        }
-        this.props.setTakenSeats(takenSeats);
+        this.state.checked ? this.props.addTakenSeat(seatId) : this.props.removeTakenSeat(seatId);
     }   
        
     render() {

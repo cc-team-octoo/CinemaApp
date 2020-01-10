@@ -1,27 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { resetTakenSeats } from '../actions';
 import { ModalBckg, StyledModal, StyledButton, StyledInfo, StyledTitle } from './Styled';
 
-const handleClick = (props) => {
-    return `{props.seats}`
+const mapDispatchToProps = { resetTakenSeats }
+
+class Modal extends Component {
+
+    handleClick = () => {
+        this.props.resetTakenSeats();
+    }
+
+    render() {
+        return ReactDOM.createPortal(
+            <ModalBckg>
+                <StyledModal>
+                    <h2>The confirmation email was sent</h2>
+                    <StyledInfo>You reserved {this.props.seats} seats for a movie:</StyledInfo>
+                    <StyledTitle>"{this.props.film}"</StyledTitle>
+                    <StyledInfo>The seance will take place at {this.props.time}</StyledInfo>
+                    <Link to='/'>
+                        <StyledButton onClick={this.handleClick}>OK</StyledButton>
+                    </Link>
+                </StyledModal>
+            </ModalBckg>, 
+            document.querySelector('#modal')
+        )
+    }
 }
 
-const Modal = props => {
-    return ReactDOM.createPortal(
-        <ModalBckg>
-            <StyledModal>
-                <h2>The confirmation email was sent</h2>
-                <StyledInfo>You reserved {props.seats} seats for a movie:</StyledInfo>
-                <StyledTitle>"{props.film}"</StyledTitle>
-                <StyledInfo>The seance will take place at {props.time}</StyledInfo>
-                <Link to='/'>
-                    <StyledButton onClick={handleClick}>OK</StyledButton>
-                </Link>
-            </StyledModal>
-        </ModalBckg>, 
-        document.querySelector('#modal')
-    )
-}
-
-export default Modal;
+export default connect(null, mapDispatchToProps)(Modal);

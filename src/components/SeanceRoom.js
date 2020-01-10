@@ -21,7 +21,13 @@ class SeanceRoom extends Component {
     onFormSubmit = formValues => {
         const {username, email} = formValues;
         console.log(`You made a reservation of seats: . Username: ${username} email address: ${email}`);
-        this.setState({ showModal: true })
+        if (this.props.takenSeats.length === 0) {
+            alert('You need to choose at least one seat')
+        } else if (this.props.takenSeats.length > 10) {
+            alert('You can choose maximum 10 seats on one reservation')
+        } else {
+            this.setState({ showModal: true })
+        }
     }
     
     render() {
@@ -38,16 +44,15 @@ class SeanceRoom extends Component {
                 <StyledScreen>screen</StyledScreen>
                 <Room taken={this.state.taken}/>
                 <ReservationFrom onFormSubmit={this.onFormSubmit} />
+                <p>{this.props.takenSeats}</p>
             </div>
         ) 
     }
 };
 
 function mapStateToProps(state){
-    // console.log(state)
     return {
         takenSeats: state.takenSeats.takenSeats,
-        bookedFilm: state.bookedFilm,
         bookingTime: state.bookingTime,
         bookedTitle: state.bookedTitle
     }
