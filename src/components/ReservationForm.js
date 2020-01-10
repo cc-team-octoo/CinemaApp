@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledResInfo, StyledSeatsInfo } from './Styled'
+import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledResInfo } from './Styled'
 
 
 const validate = formValues => {
@@ -32,12 +32,6 @@ const renderField = ({
     </div>
 )
 
-const renderSeatsInfo = ({ input, type }) => (
-    <div>
-        <StyledSeatsInfo {...input} type={type} disabled/>
-    </div>
-)
-
 class ReservationForm extends Component {
     render() {
         const { handleSubmit, pristine, submitting } = this.props
@@ -46,12 +40,6 @@ class ReservationForm extends Component {
                 <h2>Reservation form</h2>
                 <StyledResInfo>To make a reservation, please put here your name and email address so we can send you a confirmation message with all further details</StyledResInfo>
                 <StyledForm onSubmit={handleSubmit(this.props.onFormSubmit)}>
-                    <Field
-                        name="takenSeats"
-                        type="text"
-                        component={renderSeatsInfo}
-                        label="takenSeats"
-                    />
                     <Field
                         name="username"
                         type="text"
@@ -79,15 +67,9 @@ function mapStateToProps(state){
     }
 };
 
-
 ReservationForm = reduxForm ({
     form: 'reservationForm',
-    validate,
-    initialValues: {takenSeats: 'tu potrzebuję takenSeats'}
+    validate
 })(ReservationForm);
-
-// ReservationForm = connect(
-//     state => ({ initialValues: {takenSeats: state.takenSeats}})
-// )(ReservationForm);
 
 export default connect(mapStateToProps)(ReservationForm);

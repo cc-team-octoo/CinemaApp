@@ -98,13 +98,6 @@ export const StyledResInfo = styled.p`
   margin: 1rem 0;
 `;
 
-export const StyledSeatsInfo = styled.input`
-  border: none;
-  background-color: transparent;
-  text-align: center;
-  margin-bottom: 10px;
-`;
-
 export const StyledInput = styled.input`
   border: 1px solid grey;
   border-radius: 5px;
@@ -153,4 +146,23 @@ export const StyledButton = styled.button`
     background-color: #005263;
     box-shadow: 2px 4px 8px #87898a;
   }
+`;
+
+// MODAL
+export const ModalBckg = styled.div`
+  background-color: rgba(47, 72, 88, .7);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  aling-content: center;
+`;
+
+export const StyledModal = styled.div`
+  background-color: #fafafa;
+  height: fit-content;
+  border: 2px solid #2F4858;
+  border-radius: 5px; 
 `;

@@ -6,7 +6,7 @@ import SeanceRoom from './SeanceRoom';
 import { useSelector } from 'react-redux';
 
 const App = () => {
-    const currentFilms = useSelector(state => state.currentFilms);
+    // const currentFilms = useSelector(state => state.currentFilms);
 
     return (
         <div>
