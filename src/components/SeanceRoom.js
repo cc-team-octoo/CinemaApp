@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { StyledScreen } from './Styled';
 import Room from './Room';
 import ReservationFrom from './ReservationForm';
@@ -16,19 +17,41 @@ class SeanceRoom extends Component {
             taken: ['1A', '7C'],
             showModal: false
         }
+        this.onFormSubmit = this.onFormSubmit.bind(this)
     }
 
-    onFormSubmit = formValues => {
+    onFormSubmit(formValues) {
         const {username, email} = formValues;
-        console.log(`You made a reservation of seats: . Username: ${username} email address: ${email}`);
         if (this.props.takenSeats.length === 0) {
             alert('You need to choose at least one seat')
         } else if (this.props.takenSeats.length > 10) {
             alert('You can choose maximum 10 seats on one reservation')
         } else {
+            console.log('submit');
+
+            const message = `You made a reservation for the movie`
+
+            axios({
+                method: "POST", 
+                url:"http://localhost:8000/send", 
+                data: {
+                    username: username,   
+                    email: email,  
+                    messsage: message
+                }
+            }).then((response)=>{
+                if (response.data.msg === 'success'){
+                    alert("Message Sent."); 
+                } else if(response.data.msg === 'fail'){
+                    alert("Message failed to send.")
+                }
+            });
+
             this.setState({ showModal: true })
         }
-    }
+
+
+    };
     
     render() {
         return (

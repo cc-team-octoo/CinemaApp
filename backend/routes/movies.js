@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const express = require("express");
 const Joi = require("joi");
 const router = express.Router();
@@ -29,14 +28,14 @@ router.get("/:name", async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const schema = {
         name: Joi.string().required(),
         overview: Joi.string(),
         hoursArray: Joi.array(),
     }
     const result = Joi.validate(req.body, schema)
-    console.log(result.error)
+    // console.log(result.error)
     if (result.error) {
         res.status(400).send(result.error.details[0].message)
         return
@@ -70,7 +69,7 @@ router.put("/:name", async (req, res) => {
             return elem
         }
     })
-    console.log(result, req.body.seatsToReserve)
+    // console.log(result, req.body.seatsToReserve)
 
     req.body.seatsToReserve.forEach((elem) => {
         if (result.reservedSeats.indexOf(elem) === -1) {
@@ -78,10 +77,10 @@ router.put("/:name", async (req, res) => {
         }
 
     })
-    console.log(result.reservedSeats)
+    // console.log(result.reservedSeats)
 
     const updatedMovie = await movie.save()
-    console.log(updatedMovie)
+    // console.log(updatedMovie)
 })
 
 router.delete("/:id", async (req, res) => {
