@@ -1,25 +1,121 @@
+:root {
+  --button-color: hsl(170, 62%, 46%)
+}
+
 * {
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
+}
+
+img {
+  width: 80%;
 }
 
 h1 {
   text-align: center;
   margin: 1rem;
+  margin-bottom: 40px;
 }
 
 ol {
   display: grid;
-  grid: repeat(5, 1fr) / repeat(4, 1fr)
+  grid: repeat(1, auto) / repeat(4, 1fr);
 }
 
 li {
+  height: 100%;
+  padding: 0 6%;
+  /* text-align: justify; */
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+}
+
+.film-title {
+  font-weight: bold;
+}
+
+li span {
+  margin-bottom: 4%;
+}
+
+li span:first-child {
+  display: flex;
+  justify-content: center;
+}
+
+li span:nth-child(3) {
+  flex-grow: 1;
+}
+
+li span:last-child {
+  width: 100%;
+  font-weight: bold;
+  margin-bottom: 10%;
+  text-align: center;
+}
+
+li span:last-child span {
+  margin: 3%;
+  width: 100%;
+  display: block;
+}
+
+button {
+  color: var(--button-color);
+  background-color: white;
+  border: solid 1px var(--button-color);
+  font-size: 1.6vh;
+  padding: .5em;
+  margin: 1%;
+  transition: 0.4s;
+}
+
+button:hover {
+  color: white;
+  background-color: var(--button-color);
+  cursor: pointer;
+}
+
+@media (max-width: 950px) {
+  ol {
+    display: grid;
+    grid: repeat(1, auto) / repeat(3, 1fr);
+  }
+  span {
+    font-size: 1.7vh;
+  }
+
+  img {
+    width: 70%;
+  }
+
+  button {
+    font-size: 1.4vh;
+  }
+}
+
+@media (max-width: 600px) {
+  ol {
+    display: grid;
+    grid: repeat(1, auto) / repeat(2, 1fr);
+  }
+
+  span {
+    font-size: 1.4vh;
+  }
+
+  img {
+    width: 70%;
+  }
+
+  button {
+    font-size: 1.2vh;
+  }
 }

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
+import ScreeningTimeButton from "./ScreeningTimeButton";
 import { connect } from 'react-redux';
-import ScreeningTimeButton from './ScreeningTimeButton';
-import { setFilmToBook, setTimeOfBooking, setFilmTitleToBook } from '../actions'
+import { setFilmToBook, setTimeOfBooking, setFilmTitleToBook } from '../actions';
 
 const mapDispatchToProps = {
     setFilmToBook,
@@ -32,11 +32,13 @@ class Film extends React.Component {
                 <span>{film.title}</span>
                 <span>{film.overview}</span>
                 <span>Book a ticket:
+                  <span>
                     {
                         this.screeningTimeList.map((screening, i) => (
                             <ScreeningTimeButton key={i} time={screening} filmId={film.id} handleClick={this.handleClick}/>
                         ))
                     }
+                  </span>
                 </span>
             </li>
         )
