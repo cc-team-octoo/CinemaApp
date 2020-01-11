@@ -30,7 +30,6 @@ class Film extends React.Component {
             <li>
                 <span><img src={src} alt="" /></span>
                 <span>{film.title}</span>
-                <span>{film.overview}</span>
                 <span>Book a ticket:
                   <span>
                     {
@@ -40,6 +39,7 @@ class Film extends React.Component {
                     }
                   </span>
                 </span>
+                <span>{film.overview}</span>
             </li>
         )
     }

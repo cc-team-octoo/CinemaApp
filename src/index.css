@@ -1,5 +1,5 @@
 :root {
-  --button-color: hsl(170, 62%, 46%)
+  --button-color: #2f4858;
 }
 
 * {
@@ -51,20 +51,21 @@ li span:first-child {
 }
 
 li span:nth-child(3) {
-  flex-grow: 1;
-}
-
-li span:last-child {
   width: 100%;
   font-weight: bold;
-  margin-bottom: 10%;
+  margin-bottom: 2%;
   text-align: center;
 }
 
-li span:last-child span {
+li span:nth-child(3) span {
   margin: 3%;
   width: 100%;
   display: block;
+}
+
+li span:nth-child(4) {
+  flex-grow: 1;
+  margin-bottom: 10%;
 }
 
 button {
