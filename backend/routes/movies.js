@@ -3,12 +3,17 @@ const express = require("express");
 const Joi = require("joi");
 const router = express.Router();
 const bodyParser = require('body-parser')
-const Movie=require("../backend")
+const Movie=require(".././backend")
 router.use(express.json())
 router.use(bodyParser.urlencoded({
     extended: true
 }));
 router.use(bodyParser.json());
+
+
+
+
+
 
 router.get("/", async (req, res) => {
     const movies = await Movie.find().sort("name");
@@ -25,6 +30,25 @@ router.get("/:name", async (req, res) => {
     }
     res.send(movie)
 });
+const movieSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+        dropDups: true,
+    },
+    hours: [{
+        hour: Number,
+        reservedSeats: [],
+    }],
+    overview: String,
+    date: {
+        type: Date,
+        default: Date.now
+    }
+})
+
+
 
 
 
@@ -41,7 +65,10 @@ router.post('/', async (req, res) => {
         res.status(400).send(result.error.details[0].message)
         return
     }
-
+    /*const doesUserExit = await Movie.exists({ name: req.body.name });
+    if (doesUserExit === true) {
+        return
+    }*/
     const movie = new Movie({
 
         name: req.body.name,
@@ -58,11 +85,11 @@ router.post('/', async (req, res) => {
 })
 
 router.put("/:name", async (req, res) => {
-    const movie = await Movie.find({
+    const movie = await Movie.findOne({
         name: req.params.name
     });
     if (!movie) {
-        res.status(404).send("The movie with the given Id ws not found")
+        res.status(200).send("The movie with the given Id ws not found")
         return
     }
     const result = movie.hours.find(elem => {
@@ -82,6 +109,7 @@ router.put("/:name", async (req, res) => {
 
     const updatedMovie = await movie.save()
     console.log(updatedMovie)
+    return
 })
 
 router.delete("/:id", async (req, res) => {

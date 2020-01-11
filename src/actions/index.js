@@ -18,7 +18,9 @@ export const fetchCurrentFilms = () => async dispatch => {
                 overview: movie.overview,
                 hoursArray: [4, 6.5, 9]
             })
-        })
+        }).catch(error => {                  // 3
+            console.log(error)
+       });
     }
     async function createMovieBase(data) {
         let generatedResponse = []
