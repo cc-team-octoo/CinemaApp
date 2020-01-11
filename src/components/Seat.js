@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addTakenSeat, removeTakenSeat } from '../actions';
 import { StyledSeat, CheckboxContainer, HiddenCheckbox } from './Styled';
+
+const mapDispatchToProps = { addTakenSeat, removeTakenSeat }
 
 class Seat extends Component {
     constructor(props) {
@@ -11,29 +15,27 @@ class Seat extends Component {
 
     handleCheckboxChange = async event => {
         await this.setState({ checked: event.target.checked });
-        this.state.checked ? 
-            console.log(`Seat number ${this.props.id}${this.props.rowName} is checked`) : 
-            console.log(`Seat number ${this.props.id}${this.props.rowName} was unchecked`);
-        console.log(this.props.taken)
+        const seatId = `${this.props.id}${this.props.rowName}`; 
+        this.state.checked ? this.props.addTakenSeat(seatId) : this.props.removeTakenSeat(seatId);
     }   
-    
-    // checkTaken = () => {
-    //     const seatId = `${this.props.id}${this.props.rowName}`;
-    //     this.props.indexOf(seatId) > -1 ? true : false;
-    // }
-
-    
+       
     render() {
+        const seatId = `${this.props.id}${this.props.rowName}`;
+        const taken = this.props.taken.indexOf(seatId) > -1;
+
         return (
             <CheckboxContainer
-                checked={this.state.checked}>
+                checked={taken || this.state.checked}>
                     <HiddenCheckbox 
-                        checked={this.state.checked}
-                        onChange={this.handleCheckboxChange}/>
-                    <StyledSeat checked={this.state.checked}>{this.props.id}</StyledSeat>
+                        checked={taken || this.state.checked}
+                        onChange={this.handleCheckboxChange}
+                        disabled={taken}/>
+                    <StyledSeat checked={taken || this.state.checked} disabled={taken}>
+                        {this.props.id}
+                    </StyledSeat>
             </CheckboxContainer>
         ) 
     }
 }
 
-export default Seat;
+export default connect(null, mapDispatchToProps)(Seat);

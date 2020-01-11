@@ -19,11 +19,11 @@ export const StyledSeat = styled.div`
   height: 20px;
   width: 20px;
   border-radius: 5px;
-  background-color: ${props => (props.checked ? "black" : "green")};
+  background-color: ${props => props.disabled ? 'rgba(47, 72, 88, .6)' : props.checked ? 'black' : 'green'};
   margin: 3px 2px;
   display: inline-block;
   cursor: pointer;
-  color: ${props => (props.checked ? "#fafafa" : "green")};
+  color: ${props => props.disabled ? 'transparent' : props.checked ? '#fafafa' : 'transparent'};
   font-size: 12px;
   line-height: 20px;
   text-align: center;
@@ -31,8 +31,8 @@ export const StyledSeat = styled.div`
   transition: background-color 0.1s;
 
   &:hover {
-    color: #fafafa;
-    background-color: purple;
+      color: ${props => props.disabled ? 'transparent' : '#fafafa'};
+      background-color: ${props => props.disabled ? 'rgba(47, 72, 88, .6)' : 'purple'};
   }
 
   @media (min-width: 400px) {
@@ -94,7 +94,7 @@ export const StyledForm = styled.form`
   margin-top: 10px;
 `;
 
-export const StyledResInfo = styled.p`
+export const StyledInfo = styled.p`
   margin: 1rem 0;
 `;
 
@@ -149,4 +149,30 @@ export const StyledButton = styled.button`
     background-color: #005263;
     box-shadow: 2px 4px 8px #87898a;
   }
+`;
+
+// MODAL
+export const ModalBckg = styled.div`
+  background-color: rgba(47, 72, 88, .7);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  justify-content: center;
+`;
+
+export const StyledModal = styled.div`
+  background-color: #fafafa;
+  height: fit-content;
+  border: 2px solid #2F4858;
+  border-radius: 5px; 
+  padding: 1.5rem;
+  margin-top: 20vh;
+  text-align: center;
+`;
+
+export const StyledTitle = styled.p`
+  font-size: 1.2rem;
+  font-weight: 400;
 `;

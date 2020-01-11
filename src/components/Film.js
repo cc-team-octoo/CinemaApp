@@ -1,34 +1,12 @@
-import React from "react";
-import ScreeningTimeButton from "./ScreeningTimeButton";
+import React from 'react';
 import { connect } from 'react-redux';
-import { setFilmToBook, setTimeOfBooking } from '../actions'
-
-class Film extends React.Component {
-  screeningTimeList = ["4:00 PM", "6:30 PM", "9:00 PM"];
-
-  render() {
-    const { film } = this.props;
-    const src = `https://image.tmdb.org/t/p/w300/${film.poster_path}`;
-    return (
-      <li>
-        <span>
-          <img src={src} alt="" />
-        </span>
-        <span className="film-title ">{film.title}</span>
-        <span>{film.overview}</span>
-        <span>
-          Book a ticket:
-          {this.screeningTimeList.map((screening, i) => (
-            <ScreeningTimeButton key={i} time={screening} filmId={film.id} />
-          ))}
-        </span>
-      </li>
-    );
-  }
+import ScreeningTimeButton from './ScreeningTimeButton';
+import { setFilmToBook, setTimeOfBooking, setFilmTitleToBook } from '../actions'
 
 const mapDispatchToProps = {
     setFilmToBook,
-    setTimeOfBooking
+    setTimeOfBooking,
+    setFilmTitleToBook
 }
 
 class Film extends React.Component {
@@ -42,6 +20,7 @@ class Film extends React.Component {
     handleClick(e) {
         this.props.setFilmToBook(this.props.film.id);
         this.props.setTimeOfBooking(e.target.innerText);
+        this.props.setFilmTitleToBook(this.props.film.title);
     }
 
     render() {
