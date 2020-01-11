@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledScreen = styled.div`
   text-align: center;
@@ -6,7 +6,7 @@ export const StyledScreen = styled.div`
   background-color: #000;
   width: 280px;
   border-radius: 5px;
-  font-size: .8rem;
+  font-size: 0.8rem;
   padding: 2px;
   margin: auto;
 
@@ -28,7 +28,7 @@ export const StyledSeat = styled.div`
   line-height: 20px;
   text-align: center;
   user-select: none;
-  transition: background-color .1s;
+  transition: background-color 0.1s;
 
   &:hover {
       color: ${props => props.disabled ? 'transparent' : '#fafafa'};
@@ -47,7 +47,7 @@ export const CheckboxContainer = styled.label`
   vertical-align: middle;
 `;
 
-export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
   // Hide checkbox visually but remain accessible to screen readers.
   // Source: https://polished.js.org/docs/#hidevisually
   border: 0;
@@ -83,7 +83,7 @@ export const StyledFormContainer = styled.div`
   margin: auto;
   padding: 1rem 1.5rem;
   text-align: center;
-  border: 2px solid #2F4858;
+  border: 2px solid #2f4858;
   border-radius: 5px;
 `;
 
@@ -109,7 +109,7 @@ export const StyledInput = styled.input`
   &:focus {
     outline: none;
     box-shadow: 2px 4px 8px #87898a;
-  };
+  }
 
   &::placeholder {
     color: #87898a;
@@ -117,9 +117,9 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledError = styled.p`
-  font-size: .8rem;
-  color: #D8000C;
-  background-color: #FFBABA;
+  font-size: 0.8rem;
+  color: #d8000c;
+  background-color: #ffbaba;
   text-align: center;
   padding: 2px;
   margin: 2px;
@@ -128,20 +128,23 @@ export const StyledError = styled.p`
 export const StyledButton = styled.button`
   font-size: 1.2rem;
   color: #fafafa;
-  padding: .5rem 1.2rem;
+  padding: 0.5rem 1.2rem;
   border: none;
   border-radius: 5px;
-  background-color: #2F4858;
+  background-color: #2f4858;
   margin: 10px;
   cursor: pointer;
 
-  &:disabled, &:disabled&:hover {
-    background-color: rgba(47, 72, 88, .6);
+  &:disabled,
+  &:disabled&:hover {
+    background-color: rgba(47, 72, 88, 0.6);
     box-shadow: none;
     cursor: default;
   }
 
-  &:focus, &:active, &:hover {
+  &:focus,
+  &:active,
+  &:hover {
     outline: none;
     background-color: #005263;
     box-shadow: 2px 4px 8px #87898a;
