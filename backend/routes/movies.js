@@ -1,19 +1,35 @@
-const Joi = require("joi");
-const bodyParser = require('body-parser')
 const mongoose = require("mongoose");
 const express = require("express");
-const app = express();
-app.use(express.json())
-app.use(bodyParser.urlencoded({
+const Joi = require("joi");
+const router = express.Router();
+const bodyParser = require('body-parser')
+const Movie=require(".././backend")
+router.use(express.json())
+router.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(bodyParser.json());
+router.use(bodyParser.json());
 
-mongoose.connect("mongodb+srv://coderscamp:coderscamp123@movie-blnwm.gcp.mongodb.net/cinema?retryWrites=true&w=majority")
-    .then(() => {
-        console.log("Connected to MongoDb...")
-    })
 
+
+
+
+
+router.get("/", async (req, res) => {
+    const movies = await Movie.find().sort("name");
+    res.send(movies)
+})
+
+router.get("/:name", async (req, res) => {
+    const movie = await Movie.find({
+        name: req.params.name
+    });
+    if (!movie) {
+        res.status(404).send("The movie with the given name was not found")
+        return
+    }
+    res.send(movie)
+});
 const movieSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -31,40 +47,12 @@ const movieSchema = new mongoose.Schema({
         default: Date.now
     }
 })
-const Movie = mongoose.model("Movie", movieSchema);
-Movie.init().then(() => {});
-
-app.get("/", (req, res) => {
-    res.send("Hello World")
-})
-app.get("/api/movies", async (req, res) => {
-    const movies = await Movie.find().sort("name");
-    res.send(movies)
-    //search by ID or by Name 
-})
-/*
-app.get("/api/movies/:id", async (req, res) => {
-    const movie = await Movie.findById(req.params.id);
-    if (!movie) {
-        res.status(404).send("The movie with the given Id ws not found")
-        return
-    }
-    res.send(movie)
-});*/
-app.get("/api/movies/:name", async (req, res) => {
-    const movie = await Movie.find({
-        name: req.params.name
-    });
-    if (!movie) {
-        res.status(404).send("The movie with the given name was not found")
-        return
-    }
-    res.send(movie)
-});
 
 
 
-app.post('/api/movies', async (req, res) => {
+
+
+router.post('/', async (req, res) => {
     console.log(req.body)
     const schema = {
         name: Joi.string().required(),
@@ -77,14 +65,10 @@ app.post('/api/movies', async (req, res) => {
         res.status(400).send(result.error.details[0].message)
         return
     }
-    const result2 = await Movie.findOne({
-        name: req.body.name
-    }).select("name").lean();
-    if (result2) {
-        res.status(404)
+    /*const doesUserExit = await Movie.exists({ name: req.body.name });
+    if (doesUserExit === true) {
         return
-    }
-
+    }*/
     const movie = new Movie({
 
         name: req.body.name,
@@ -100,12 +84,12 @@ app.post('/api/movies', async (req, res) => {
     res.send(movie)
 })
 
-app.put("/api/movies/:name", async (req, res) => {
-    const movie = await Movie.find({
+router.put("/:name", async (req, res) => {
+    const movie = await Movie.findOne({
         name: req.params.name
     });
     if (!movie) {
-        res.status(404).send("The movie with the given Id ws not found")
+        res.status(200).send("The movie with the given Id ws not found")
         return
     }
     const result = movie.hours.find(elem => {
@@ -125,9 +109,10 @@ app.put("/api/movies/:name", async (req, res) => {
 
     const updatedMovie = await movie.save()
     console.log(updatedMovie)
+    return
 })
 
-app.delete("/api/movies/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     const movie = await Movie.findByIdAndRemove(req.params.id);
     if (!movie) {
         res.status(404).send("The movie with the given Id ws not found")
@@ -135,6 +120,13 @@ app.delete("/api/movies/:id", async (req, res) => {
     }
     res.send(movie)
 });
-app.listen(process.env.PORT || 8000, () => {
-    console.log("Listening on port...")
-})
+/*
+app.get("/:id", async (req, res) => {
+    const movie = await Movie.findById(req.params.id);
+    if (!movie) {
+        res.status(404).send("The movie with the given Id ws not found")
+        return
+    }
+    res.send(movie)
+});*/
+module.exports=router

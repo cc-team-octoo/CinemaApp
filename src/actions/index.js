@@ -4,6 +4,9 @@ export const fetchCurrentFilms = () => async dispatch => {
     const response = await MovieDatabase.get();
     console.log(await response.data.results);
 
+//     dispatch({ type: 'FETCH_CURRENT_FILMS_SUCCESS', payload: response.data.results});
+// };
+
     const createMovie = function (movie) {
         fetch("http://localhost:8000/api/movies", {
             headers: {
@@ -15,7 +18,9 @@ export const fetchCurrentFilms = () => async dispatch => {
                 overview: movie.overview,
                 hoursArray: [4, 6.5, 9]
             })
-        })
+        }).catch(error => {                  // 3
+            console.log(error)
+       });
     }
     async function createMovieBase(data) {
         let generatedResponse = []
@@ -33,7 +38,7 @@ export const fetchCurrentFilms = () => async dispatch => {
         type: 'FETCH_CURRENT_FILMS_SUCCESS',
         payload: response.data.results
     });
-}
+};
 
 export const setFilmToBook = filmId => (
     {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { StyledForm, StyledFormContainer, StyledInput, StyledError, StyledButton, StyledInfo } from './Styled'
 
-
 const validate = formValues => {
     const { username, email } = formValues;
     const errors = {};
@@ -37,7 +36,7 @@ class ReservationForm extends Component {
         return (
             <StyledFormContainer>
                 <h2>Reservation form</h2>
-                <StyledInfo>To make a reservation, please tpye your name and email address so we can send you a confirmation message with all the further details</StyledInfo>
+                <StyledInfo>To make a reservation, please enter your name and email address so we can send you a confirmation message with all the further details</StyledInfo>
                 <StyledForm onSubmit={handleSubmit(this.props.onFormSubmit)}>
                     <Field
                         name="username"

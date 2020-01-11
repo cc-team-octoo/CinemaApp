@@ -1,7 +1,7 @@
-import React from "react";
-import ScreeningTimeButton from "./ScreeningTimeButton";
+import React from 'react';
 import { connect } from 'react-redux';
-import { setFilmToBook, setTimeOfBooking, setFilmTitleToBook } from '../actions';
+import ScreeningTimeButton from './ScreeningTimeButton';
+import { setFilmToBook, setTimeOfBooking, setFilmTitleToBook } from '../actions'
 
 const mapDispatchToProps = {
     setFilmToBook,
