@@ -17,7 +17,31 @@ class SeanceRoom extends Component {
             showModal: false
         }
     }
-
+    componentDidMount() {
+        const fetchMovie = (name = "Ad Astra", time = "6:30PM") => {
+            let hourArray=0
+            if (time === "4:00PM") {
+                hourArray = 0;
+            }
+            else if (time === "6:30PM") {
+                hourArray = 1;
+            }
+            else if (time === "9:00PM") {
+                hourArray=2
+            }
+          return fetch(`http://localhost:8000/api/movies/${name}`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: "GET",
+          }).then((response) => { return response.json() })
+               .then((res) => { return res[0].hours[0].reservedSeats})
+              .catch((err) => console.log(err))
+        }
+        fetchMovie("Ad Astra",0).then((result)=> {
+            this.setState({taken :result})
+     })
+       }
     onFormSubmit = formValues => {
         const {username, email} = formValues;
         console.log(`You made a reservation of seats: . Username: ${username} email address: ${email}`);
@@ -27,6 +51,19 @@ class SeanceRoom extends Component {
             alert('You can choose maximum 10 seats on one reservation')
         } else {
             this.setState({ showModal: true })
+            const updateMovie = function (name="Ad Astra",hour=4,takenSeats) {
+                fetch(`http://localhost:8000/api/movies/${name}`, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PUT",
+                    body: JSON.stringify({
+                        seatsToReserve:takenSeats,
+                        hour:hour
+                    })
+                })
+            }
+            updateMovie("Ad Astra",4,this.props.takenSeats)
         }
     }
     
