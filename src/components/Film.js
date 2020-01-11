@@ -30,14 +30,16 @@ class Film extends React.Component {
             <li>
                 <span><img src={src} alt="" /></span>
                 <span>{film.title}</span>
-                <span>{film.overview}</span>
                 <span>Book a ticket:
+                  <span>
                     {
                         this.screeningTimeList.map((screening, i) => (
                             <ScreeningTimeButton key={i} time={screening} filmId={film.id} handleClick={this.handleClick}/>
                         ))
                     }
+                  </span>
                 </span>
+                <span>{film.overview}</span>
             </li>
         )
     }

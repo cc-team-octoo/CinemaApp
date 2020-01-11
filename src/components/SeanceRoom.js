@@ -17,6 +17,7 @@ class SeanceRoom extends Component {
             showModal: false
         }
     }
+
     componentDidMount() {
         const fetchMovie = (name = "Ad Astra", time = "6:30PM") => {
             let hourArray=0
