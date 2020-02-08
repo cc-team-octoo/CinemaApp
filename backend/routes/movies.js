@@ -11,10 +11,6 @@ router.use(bodyParser.urlencoded({
 router.use(bodyParser.json());
 
 
-
-
-
-
 router.get("/", async (req, res) => {
     const movies = await Movie.find().sort("name");
     res.send(movies)
@@ -30,27 +26,6 @@ router.get("/:name", async (req, res) => {
     }
     res.send(movie)
 });
-const movieSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true,
-        dropDups: true,
-    },
-    hours: [{
-        hour: Number,
-        reservedSeats: [],
-    }],
-    overview: String,
-    date: {
-        type: Date,
-        default: Date.now
-    }
-})
-
-
-
-
 
 router.post('/', async (req, res) => {
     console.log(req.body)
@@ -120,6 +95,7 @@ router.delete("/:id", async (req, res) => {
     }
     res.send(movie)
 });
+
 /*
 app.get("/:id", async (req, res) => {
     const movie = await Movie.findById(req.params.id);
@@ -129,4 +105,5 @@ app.get("/:id", async (req, res) => {
     }
     res.send(movie)
 });*/
+
 module.exports=router

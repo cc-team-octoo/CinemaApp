@@ -2,13 +2,13 @@ import MovieDatabase from '../apis/MovieDatabase';
 
 export const fetchCurrentFilms = () => async dispatch => {
     const response = await MovieDatabase.get();
-    console.log(await response.data.results);
+    console.log(`fetched movies from API: ${await response.data.results}`);
 
 //     dispatch({ type: 'FETCH_CURRENT_FILMS_SUCCESS', payload: response.data.results});
 // };
 
     const createMovie = function (movie) {
-        fetch("http://localhost:8000/api/movies", {
+        fetch("/api/movies", {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -22,6 +22,7 @@ export const fetchCurrentFilms = () => async dispatch => {
             console.log(error)
        });
     }
+
     async function createMovieBase(data) {
         let generatedResponse = []
         await Promise.all(data.map(async (elem) => {

@@ -37,6 +37,7 @@ const movieSchema = new mongoose.Schema({
         default: Date.now
     }
 })
+
 const Movie = mongoose.model("Movie", movieSchema);
 Movie.init().then(() => {});
 
@@ -141,6 +142,7 @@ app.delete("/api/movies/:id", async (req, res) => {
     }
     res.send(movie)
 });
+
 app.listen(process.env.PORT || 8000, () => {
     console.log("Listening on port...")
 })
