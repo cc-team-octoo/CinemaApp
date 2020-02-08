@@ -3,16 +3,22 @@ const bodyParser = require('body-parser')
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
+
+require('dotenv/config');
+
 app.use(express.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb+srv://coderscamp:coderscamp123@movie-blnwm.gcp.mongodb.net/cinema?retryWrites=true&w=majority")
-    .then(() => {
-        console.log("Connected to MongoDb...")
+mongoose.connect(process.env.DB_CONNECTION, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
     })
+    .then(() => console.log('Connected to MongoDB...'))
+    .catch(err => console.error('Could not connect to MongoDB...', err));
 
 const movieSchema = new mongoose.Schema({
     name: {
